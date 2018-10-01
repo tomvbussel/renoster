@@ -1,0 +1,9 @@
+Language: Cpp
+BasedOnStyle: Google
+AccessModifierOffset: -4
+IndentWidth: 4
+IndentCaseLabels: false
+DerivePointerAlignment: false
+PointerAlignment: Middle
+Standard: Cpp11
+ContinuationIndentWidth: 8

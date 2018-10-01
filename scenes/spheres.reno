@@ -1,0 +1,33 @@
+PixelFilter "BoxFilter"
+    "vector2 radius" [1.0 1.0]
+
+Display "ImageDisplay"
+    "string filename" ["spheres.exr"]
+
+Film
+    "int xresolution" [640]
+    "int yresolution" [480]
+
+Integrator "Occlusion"
+    "int numsamples" [1]
+
+Sampler "IndependentSampler"
+    "int spp" [1]
+
+LookAt 0 2 -10  0 0 0  0 1 0
+Camera "PinholeCamera"
+    "float fov" [45.0]
+
+WorldBegin
+    AttributeBegin
+        Translate 0 -100 0
+        Geometry "Sphere"
+            "float radius" [100.0]
+    AttributeEnd
+
+    AttributeBegin
+        Translate 0 1 0
+        Geometry "Sphere"
+            "float radius" [1.0]
+    AttributeEnd
+WorldEnd

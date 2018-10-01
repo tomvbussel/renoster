@@ -1,0 +1,8 @@
+add_subdirectory(cameras)
+add_subdirectory(displays)
+add_subdirectory(geometry)
+add_subdirectory(integrators)
+add_subdirectory(lights)
+add_subdirectory(materials)
+add_subdirectory(pixelfilters)
+add_subdirectory(samplers)

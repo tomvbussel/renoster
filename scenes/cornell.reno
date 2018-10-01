@@ -1,0 +1,81 @@
+Integrator "PathTracer"
+
+Sampler "IndependentSampler" 
+    "int spp" [64]
+
+PixelFilter "BoxFilter" 
+    "vector2 radius" [1.0 1.0]
+
+Display "ImageDisplay"
+    "string filename" ["cornell-box.exr"] 
+
+Film
+    "int xresolution" [512]
+    "int yresolution" [512]
+
+LookAt 0.0 1.0 -6.8  0.0 1.0 0.0  0.0 1.0 0.0
+Camera "PinholeCamera"
+    "float fov" [19.5]
+
+WorldBegin
+    AttributeBegin
+        Material "Diffuse"
+            "color reflectance" [0.725 0.710 0.680]
+        Geometry "TriangleMesh"
+            "int vertices" [0 1 2 0 2 3]
+            "point P" [-1.0  0.0 -1.0
+                       -1.0  0.0  1.0
+                        1.0  0.0  1.0
+                        1.0  0.0 -1.0]
+    AttributeEnd
+    AttributeBegin
+        Material "Diffuse"
+            "color reflectance" [0.725 0.710 0.680]
+        Geometry "TriangleMesh"
+            "int vertices" [0 1 2 0 2 3]
+            "point P" [-1.0  2.0  1.0
+                       -1.0  2.0 -1.0
+                        1.0  2.0 -1.0
+                        1.0  2.0  1.0]
+    AttributeEnd
+    AttributeBegin
+        Material "Diffuse"
+            "color reflectance" [0.725 0.710 0.680]
+        Geometry "TriangleMesh"
+            "int vertices" [0 1 2 0 2 3]
+            "point P" [-1.0  0.0  1.0
+                       -1.0  2.0  1.0
+                        1.0  2.0  1.0
+                        1.0  0.0  1.0]
+    AttributeEnd
+    AttributeBegin
+        Material "Diffuse"
+            "color reflectance" [0.63 0.065 0.05]
+        Geometry "TriangleMesh"
+            "int vertices" [0 1 2 0 2 3]
+            "point P" [-1.0  0.0 -1.0
+                       -1.0  2.0 -1.0
+                       -1.0  2.0  1.0
+                       -1.0  0.0  1.0]
+    AttributeEnd
+    AttributeBegin
+        Material "Diffuse"
+            "color reflectance" [0.14 0.45 0.091]
+        Geometry "TriangleMesh"
+            "int vertices" [0 1 2 0 2 3]
+            "point P" [1.0  0.0  1.0
+                       1.0  2.0  1.0
+                       1.0  2.0 -1.0
+                       1.0  0.0 -1.0]
+    AttributeEnd
+	AttributeBegin
+		GeometryLightSource "DiffuseLight"
+            "color L" [17.0 12.0 4.0]
+		Geometry "TriangleMesh" 
+            "int vertices" [0 1 2 0 2 3]
+            "point P" [-0.25 1.98 -0.25
+                        0.25 1.98 -0.25
+                        0.25 1.98  0.25
+                       -0.25 1.98  0.25]
+	AttributeEnd
+WorldEnd
