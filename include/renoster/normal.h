@@ -33,6 +33,20 @@ public:
 
 using Normal3f = Normal<3, float>;
 
+template <size_t D, typename T>
+inline std::ostream & operator<<(std::ostream & os, const Normal<D, T> & n)
+{
+    os << "[ ";
+    for (size_t d = 0; d < D; ++d) {
+        os << n[d];
+        if (d + 1 < D) {
+            os << ", ";
+        }
+    }
+    os << " ]";
+    return os;
+}
+
 }  // namespace renoster
 
 #endif  // RENOSTER_MATH_NORMAL_H_

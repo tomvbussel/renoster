@@ -150,7 +150,22 @@ using Point4i = Point<4, int>;
 using Point4f = Point<4, float>;
 
 template <size_t D, typename T>
-Point<D, T> operator-(Point<D, T> p) {
+inline std::ostream & operator<<(std::ostream & os, const Point<D, T> & p)
+{
+    os << "[ ";
+    for (size_t d = 0; d < D; ++d) {
+        os << p[d];
+        if (d + 1 < D) {
+            os << ", ";
+        }
+    }
+    os << " ]";
+    return os;
+}
+
+template <size_t D, typename T>
+Point<D, T> operator-(Point<D, T> p)
+{
     for (size_t d = 0; d < D; ++d) {
         p[d] = -p[d];
     }
@@ -159,7 +174,8 @@ Point<D, T> operator-(Point<D, T> p) {
 
 template <size_t D, typename T, typename S>
 Point<D, decltype(T() + S())> operator+(const Point<D, T> & lhs,
-                                        const Point<D, S> & rhs) {
+                                        const Point<D, S> & rhs)
+{
     Point<D, decltype(T() + S())> result;
     for (size_t d = 0; d < D; ++d) {
         result[d] = lhs[d] + rhs[d];
@@ -169,7 +185,8 @@ Point<D, decltype(T() + S())> operator+(const Point<D, T> & lhs,
 
 template <size_t D, typename T, typename S>
 Point<D, decltype(T() + S())> operator+(const Point<D, T> & lhs,
-                                        const Vector<D, S> & rhs) {
+                                        const Vector<D, S> & rhs)
+{
     Point<D, decltype(T() + S())> result;
     for (size_t d = 0; d < D; ++d) {
         result[d] = lhs[d] + rhs[d];
@@ -179,7 +196,8 @@ Point<D, decltype(T() + S())> operator+(const Point<D, T> & lhs,
 
 template <size_t D, typename T, typename S>
 Vector<D, decltype(T() - S())> operator-(const Point<D, T> & lhs,
-                                         const Point<D, S> & rhs) {
+                                         const Point<D, S> & rhs)
+{
     Vector<D, decltype(T() - S())> result;
     for (size_t d = 0; d < D; ++d) {
         result[d] = lhs[d] - rhs[d];
@@ -189,7 +207,8 @@ Vector<D, decltype(T() - S())> operator-(const Point<D, T> & lhs,
 
 template <size_t D, typename T, typename S>
 Point<D, decltype(T() - S())> operator-(const Point<D, T> & lhs,
-                                        const Vector<D, S> & rhs) {
+                                        const Vector<D, S> & rhs)
+{
     Point<D, decltype(T() - S())> result;
     for (size_t d = 0; d < D; ++d) {
         result[d] = lhs[d] - rhs[d];
@@ -198,7 +217,8 @@ Point<D, decltype(T() - S())> operator-(const Point<D, T> & lhs,
 }
 
 template <size_t D, typename T, typename S>
-Point<D, decltype(T() * S())> operator*(const Point<D, T> & p, S c) {
+Point<D, decltype(T() * S())> operator*(const Point<D, T> & p, S c)
+{
     Point<D, decltype(T() * S())> result;
     for (size_t d = 0; d < D; ++d) {
         result[d] = p[d] * c;
@@ -207,7 +227,8 @@ Point<D, decltype(T() * S())> operator*(const Point<D, T> & p, S c) {
 }
 
 template <size_t D, typename T, typename S>
-Point<D, decltype(T() * S())> operator*(T c, const Point<D, S> & p) {
+Point<D, decltype(T() * S())> operator*(T c, const Point<D, S> & p)
+{
     Point<D, decltype(T() * S())> result;
     for (size_t d = 0; d < D; ++d) {
         result[d] = c * p[d];
@@ -216,7 +237,8 @@ Point<D, decltype(T() * S())> operator*(T c, const Point<D, S> & p) {
 }
 
 template <size_t D, typename T, typename S>
-Point<D, decltype(T() / S())> operator/(const Point<D, T> & p, S c) {
+Point<D, decltype(T() / S())> operator/(const Point<D, T> & p, S c)
+{
     Point<D, decltype(T() / S())> result;
     for (size_t d = 0; d < D; ++d) {
         result[d] = p[d] / c;
@@ -226,8 +248,8 @@ Point<D, decltype(T() / S())> operator/(const Point<D, T> & p, S c) {
 
 template <size_t D, typename T, typename S>
 Point<D, remove_cvref_t<decltype(std::min(T(), S()))>> Min(
-        const Point<D, T> & lhs, const Point<D, S> & rhs) {
-
+        const Point<D, T> & lhs, const Point<D, S> & rhs)
+{
     using R = remove_cvref_t<decltype(std::min(T(), S()))>;
 
     Point<D, R> result;
@@ -239,8 +261,8 @@ Point<D, remove_cvref_t<decltype(std::min(T(), S()))>> Min(
 
 template <size_t D, typename T, typename S>
 Point<D, remove_cvref_t<decltype(std::max(T(), S()))>> Max(
-        const Point<D, T> & lhs, const Point<D, S> & rhs) {
-
+        const Point<D, T> & lhs, const Point<D, S> & rhs)
+{
     using R = remove_cvref_t<decltype(std::max(T(), S()))>;
 
     Point<D, R> result;
@@ -251,7 +273,8 @@ Point<D, remove_cvref_t<decltype(std::max(T(), S()))>> Max(
 }
 
 template <size_t D, typename T>
-Point<D, decltype(std::floor(T()))> Floor(const Point<D, T> & p) {
+Point<D, decltype(std::floor(T()))> Floor(const Point<D, T> & p)
+{
     Point<D, decltype(std::floor(T()))> result;
     for (size_t d = 0; d < D; ++d) {
         result[d] = std::floor(p[d]);
@@ -260,7 +283,8 @@ Point<D, decltype(std::floor(T()))> Floor(const Point<D, T> & p) {
 }
 
 template <size_t D, typename T>
-Point<D, decltype(std::ceil(T()))> Ceil(const Point<D, T> & p) {
+Point<D, decltype(std::ceil(T()))> Ceil(const Point<D, T> & p)
+{
     Point<D, decltype(std::ceil(T()))> result;
     for (size_t d = 0; d < D; ++d) {
         result[d] = std::ceil(p[d]);
@@ -269,7 +293,8 @@ Point<D, decltype(std::ceil(T()))> Ceil(const Point<D, T> & p) {
 }
 
 template <size_t D, typename T, typename S>
-bool operator==(const Point<D, T> & lhs, const Point<D, S> & rhs) {
+bool operator==(const Point<D, T> & lhs, const Point<D, S> & rhs)
+{
     for (size_t d = 0; d < D; ++d) {
         if (lhs[d] != rhs[d]) {
             return false;
@@ -279,7 +304,8 @@ bool operator==(const Point<D, T> & lhs, const Point<D, S> & rhs) {
 }
 
 template <size_t D, typename T, typename S>
-bool operator!=(const Point<D, T> & lhs, const Point<D, S> & rhs) {
+bool operator!=(const Point<D, T> & lhs, const Point<D, S> & rhs)
+{
     for (size_t d = 0; d < D; ++d) {
         if (lhs[d] == rhs[d]) {
             return false;
@@ -290,12 +316,14 @@ bool operator!=(const Point<D, T> & lhs, const Point<D, S> & rhs) {
 
 // TODO: move this somewhere better
 template <typename T>
-T Lerp(T v1, T v2, T t) {
+T Lerp(T v1, T v2, T t)
+{
     return (T(1) - t) * v1 + t * v2;
 }
 
 template <size_t D, typename T>
-Point<D, T> Lerp(const Point<D, T> & p1, const Point<D, T> & p2, T t) {
+Point<D, T> Lerp(const Point<D, T> & p1, const Point<D, T> & p2, T t)
+{
     Point<D, T> result;
     for (size_t d = 0; d < D; ++d) {
         result[d] = Lerp(p1[d], p2[d], t);
@@ -304,12 +332,14 @@ Point<D, T> Lerp(const Point<D, T> & p1, const Point<D, T> & p2, T t) {
 }
 
 template <size_t D, typename T, typename S>
-auto Distance(const Point<D, T> & p1, const Point<D, S> & p2) {
+auto Distance(const Point<D, T> & p1, const Point<D, S> & p2)
+{
     return (p2 - p1).Length();
 }
 
 template <size_t D, typename T, typename S>
-auto DistanceSquared(const Point<D, T> & p1, const Point<D, S> & p2) {
+auto DistanceSquared(const Point<D, T> & p1, const Point<D, S> & p2)
+{
     return (p2 - p1).LengthSquared();
 }
 

@@ -58,7 +58,7 @@ add_library (LibRenoster SHARED
 )
 
 target_compile_features(LibRenoster
-    PRIVATE
+    PUBLIC
         cxx_std_17
 )
 

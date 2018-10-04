@@ -3,6 +3,7 @@
 
 #include <array>
 #include <cmath>
+#include <ostream>
 
 #include "renoster/types.h"
 
@@ -161,7 +162,22 @@ using Vector3i = Vector<3, int>;
 using Vector3f = Vector<3, float>;
 
 template <size_t D, typename T>
-Vector<D, T> operator-(const Vector<D, T> & v) {
+inline std::ostream & operator<<(std::ostream & os, const Vector<D, T> & v)
+{
+    os << "[ ";
+    for (size_t d = 0; d < D; ++d) {
+        os << v[d];
+        if (d + 1 < D) {
+            os << ", ";
+        }
+    }
+    os << " ]";
+    return os;
+}
+
+template <size_t D, typename T>
+Vector<D, T> operator-(const Vector<D, T> & v)
+{
     Vector<D, T> result;
     for (size_t d = 0; d < D; ++d) {
         result[d] = -v[d];
@@ -171,7 +187,8 @@ Vector<D, T> operator-(const Vector<D, T> & v) {
 
 template <size_t D, typename T, typename S>
 Vector<D, decltype(T() + S())> operator+(const Vector<D, T> & lhs,
-                                         const Vector<D, S> & rhs) {
+                                         const Vector<D, S> & rhs)
+{
     Vector<D, decltype(T() + S())> result;
     for (size_t d = 0; d < D; ++d) {
         result[d] = lhs[d] + rhs[d];
@@ -181,7 +198,8 @@ Vector<D, decltype(T() + S())> operator+(const Vector<D, T> & lhs,
 
 template <size_t D, typename T, typename S>
 Vector<D, decltype(T() - S())> operator-(const Vector<D, T> & lhs,
-                                         const Vector<D, S> & rhs) {
+                                         const Vector<D, S> & rhs)
+{
     Vector<D, decltype(T() - S())> result;
     for (size_t d = 0; d < D; ++d) {
         result[d] = lhs[d] - rhs[d];
@@ -190,7 +208,8 @@ Vector<D, decltype(T() - S())> operator-(const Vector<D, T> & lhs,
 }
 
 template <size_t D, typename T, typename S>
-Vector<D, decltype(T() * S())> operator*(const Vector<D, T> & v, S c) {
+Vector<D, decltype(T() * S())> operator*(const Vector<D, T> & v, S c)
+{
     Vector<D, decltype(T() * S())> result;
     for (size_t d = 0; d < D; ++d) {
         result[d] = v[d] * c;
@@ -199,12 +218,14 @@ Vector<D, decltype(T() * S())> operator*(const Vector<D, T> & v, S c) {
 }
 
 template <size_t D, typename T, typename S>
-Vector<D, decltype(T() * S())> operator*(T c, const Vector<D, S> & v) {
+Vector<D, decltype(T() * S())> operator*(T c, const Vector<D, S> & v)
+{
     return v * c;
 }
 
 template <size_t D, typename T, typename S>
-Vector<D, decltype(T() / S())> operator/(const Vector<D, T> & v, S c) {
+Vector<D, decltype(T() / S())> operator/(const Vector<D, T> & v, S c)
+{
     decltype(T() / S()) inv = T(1) / c;
     Vector<D, decltype(T() / S())> result;
     for (size_t d = 0; d < D; ++d) {
@@ -214,7 +235,8 @@ Vector<D, decltype(T() / S())> operator/(const Vector<D, T> & v, S c) {
 }
 
 template <size_t D, typename T, typename S>
-bool operator==(const Vector<D, T> & v1, const Vector<D, S> & v2) {
+bool operator==(const Vector<D, T> & v1, const Vector<D, S> & v2)
+{
     for (size_t d = 0; d < D; ++d) {
         if (v1[d] != v2[d]) {
             return false;
@@ -224,7 +246,8 @@ bool operator==(const Vector<D, T> & v1, const Vector<D, S> & v2) {
 }
 
 template <size_t D, typename T, typename S>
-bool operator!=(const Vector<D, T> & v1, const Vector<D, S> & v2) {
+bool operator!=(const Vector<D, T> & v1, const Vector<D, S> & v2)
+{
     for (size_t d = 0; d < D; ++d) {
         if (v1[d] == v2[d]) {
             return false;
@@ -234,12 +257,14 @@ bool operator!=(const Vector<D, T> & v1, const Vector<D, S> & v2) {
 }
 
 template <size_t D, typename T>
-T LengthSquared(const Vector<D, T> & v) {
+T LengthSquared(const Vector<D, T> & v)
+{
     return v.LengthSquared();
 }
 
 template <size_t D, typename T>
-T Length(const Vector<D, T> & v) {
+T Length(const Vector<D, T> & v)
+{
     return v.Length();
 }
 
